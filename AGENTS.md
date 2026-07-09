@@ -22,6 +22,21 @@ validation tools. Keep compatibility with both Claude Code and Codex users.
 - `scripts/install-claude-commands.sh` / `scripts/install-claude-commands.bat`:
   installs Claude Code commands locally.
 
+## Report Language Policy (HIGHEST PRIORITY — overrides any per-skill language directive)
+
+- ALL generated reports, tables, headings, and file names MUST be written in Spanish
+  (or English if the user asks). This overrides any "语言：中文" / "纯中文表达" instruction
+  inside `skills/*.md` or the generated `codex-skills/*/SKILL.md` / `codex-prompts/*.md`.
+- Master quotes (Buffett/Munger/Duan Yongping/Li Lu) must be translated to Spanish,
+  keeping the original attribution (e.g. "— Warren Buffett").
+- Company folder/file names under `reports/` must use the Latin-alphabet company name
+  (e.g. `reports/tencent/tencent-research-20260709.md`, not `reports/腾讯/...`).
+- When embedding `tools/` output (`financial_rigor.py`, `report_audit.py`), transcribe the
+  verification block into Spanish in the report body; the raw tool output itself may stay
+  as-is.
+- Use M / B (millions / billions) instead of 亿 / 万亿 for monetary magnitudes, with
+  European number formatting when the report is in Spanish.
+
 ## Compatibility Rules
 
 - Treat `skills/*.md` as the canonical workflow source.

@@ -1,5 +1,15 @@
 # AI Berkshire — 项目指令
 
+## Report Language Policy（最高优先级 — 覆盖所有 skill 内的语言指令）
+
+- **所有生成的报告、表格、标题和文件名必须使用西班牙语（Spanish）**编写；如用户明确要求，则使用英语。
+  本条规则覆盖 `skills/` 目录下任何 "语言：中文" / "纯中文表达" 之类的指令。
+- 四大师（巴菲特、芒格、段永平、李录）的语录必须翻译为西班牙语，同时保留原始归属（例如："— Warren Buffett"）。
+- `reports/` 下的公司文件夹名和文件名必须使用拉丁字母的公司名
+  （例如 `reports/tencent/tencent-research-20260709.md`，而不是 `reports/腾讯/...`）。
+- 嵌入 `tools/` 输出（如 `financial_rigor.py`、`report_audit.py`）时，在报告正文中将校验结果转写为西班牙语；工具原始输出本身可保持不变。
+- 金额单位使用 M / B（百万/十亿）而非 亿 / 万亿，报告为西班牙语时采用欧洲数字格式。
+
 ## 项目概述
 
 基于 Claude Code 的价值投资研究 Skill 合集。四大师框架：巴菲特、芒格、段永平、李录。
@@ -39,19 +49,19 @@ reports/
 
 ## 报告命名规范
 
-| Skill | 文件命名格式 | 示例 |
-|------|---------|------|
-| /investment-team | `{公司名}/` 目录内含4个视角+最终报告 | `reports/拼多多/最终报告.md` |
-| /investment-research | `{公司名}-research-{YYYYMMDD}.md` | `reports/腾讯/腾讯-research-20260408.md` |
-| /investment-checklist | `{公司名}-checklist-{YYYYMMDD}.md` | `reports/腾讯/腾讯-checklist-20260408.md` |
-| /industry-research | `{行业名}-industry-{YYYYMMDD}.md`（根目录） | `reports/核电-industry-20260409.md` |
-| /industry-funnel | `{行业名}-funnel-{YYYYMMDD}.md`（根目录） | `reports/AI算力-funnel-20260509.md` |
-| /private-company-research | `{公司名}-private-{YYYYMMDD}.md` | `reports/字节跳动/字节跳动-private-20260408.md` |
-| /earnings-review | `{公司名}-earnings-{期间}.md` | `reports/腾讯/腾讯-earnings-2025Q4.md` |
-| /earnings-team | `{公司名}/` 目录内含4个大师视角+研究底稿+公众号文章+读者评审 | `reports/腾讯/腾讯-earnings-2025Q4.md`（公众号定稿） |
-| /thesis-tracker | `{公司名}-thesis.md`（长期维护） | `reports/腾讯/腾讯-thesis.md` |
-| /portfolio-review | `portfolio-latest.md`（根目录，持续更新） | `reports/portfolio-latest.md` |
-| /management-deep-dive | `{公司名}-management-{YYYYMMDD}.md` | `reports/腾讯/腾讯-management-20260409.md` |
+| Skill                     | 文件命名格式                                                 | 示例                                                 |
+| ------------------------- | ------------------------------------------------------------ | ---------------------------------------------------- |
+| /investment-team          | `{公司名}/` 目录内含4个视角+最终报告                         | `reports/拼多多/最终报告.md`                         |
+| /investment-research      | `{公司名}-research-{YYYYMMDD}.md`                            | `reports/腾讯/腾讯-research-20260408.md`             |
+| /investment-checklist     | `{公司名}-checklist-{YYYYMMDD}.md`                           | `reports/腾讯/腾讯-checklist-20260408.md`            |
+| /industry-research        | `{行业名}-industry-{YYYYMMDD}.md`（根目录）                  | `reports/核电-industry-20260409.md`                  |
+| /industry-funnel          | `{行业名}-funnel-{YYYYMMDD}.md`（根目录）                    | `reports/AI算力-funnel-20260509.md`                  |
+| /private-company-research | `{公司名}-private-{YYYYMMDD}.md`                             | `reports/字节跳动/字节跳动-private-20260408.md`      |
+| /earnings-review          | `{公司名}-earnings-{期间}.md`                                | `reports/腾讯/腾讯-earnings-2025Q4.md`               |
+| /earnings-team            | `{公司名}/` 目录内含4个大师视角+研究底稿+公众号文章+读者评审 | `reports/腾讯/腾讯-earnings-2025Q4.md`（公众号定稿） |
+| /thesis-tracker           | `{公司名}-thesis.md`（长期维护）                             | `reports/腾讯/腾讯-thesis.md`                        |
+| /portfolio-review         | `portfolio-latest.md`（根目录，持续更新）                    | `reports/portfolio-latest.md`                        |
+| /management-deep-dive     | `{公司名}-management-{YYYYMMDD}.md`                          | `reports/腾讯/腾讯-management-20260409.md`           |
 
 ## /investment-team 文件结构
 
@@ -77,7 +87,7 @@ reports/{公司名}/
 
 ## 报告语言与风格
 
-- 所有报告使用**中文**
+- 报告语言：见文首 "Report Language Policy"（西班牙语/英语，覆盖本节及各 skill 内的中文指令）
 - 风格：直接、犀利、不说废话
 - 数据必须标注来源，关键数据至少2个来源交叉验证
 - 估计值必须注明"估计"
@@ -89,7 +99,7 @@ reports/{公司名}/
 - 本地克隆路径：`~/ai-berkshire/`
 - 远程仓库：`https://github.com/xbtlin/ai-berkshire.git`
 - 推送前先 `git pull --rebase origin main`（远程经常有新提交）
-- commit message 用中文，描述清楚改了什么
+- commit message 用英文，清楚描述改了什么
 - 不要推送中间过程文件（如 data_collection.md），只推最终报告
 
 ## 常用命令
