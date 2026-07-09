@@ -3,6 +3,10 @@
 __pycache__/
 *.pyc
 .codex/
+
+# 本地安装的 Claude Code 项目级命令（scripts/install-claude-commands.sh --project
+# 生成的副本），是 skills/*.md 的拷贝，不需要入库
+.claude/
 /tmp/
 logs/command-log.jsonl
 reports/美团/command-log.jsonl

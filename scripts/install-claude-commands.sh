@@ -4,9 +4,9 @@ set -euo pipefail
 # ── AI Berkshire · Claude Code Commands Installer (improved) ────────────────
 #
 # Changes from the original flat-copy approach:
-#   1. Namespacing — skills land in ~/.claude/commands/berkshire/ so they
-#      appear as /berkshire:investment-research instead of polluting the
-#      top-level / menu.
+#   1. Namespacing — skills land in <dest>/berkshire/ so they appear as
+#      /berkshire:investment-research instead of polluting the top-level
+#      / menu.
 #   2. Selective install — --only and --skip let you pick which skills.
 #      Default is still "install all".
 #   3. Uninstall — --uninstall removes the namespace directory cleanly.
@@ -14,11 +14,22 @@ set -euo pipefail
 #      commands that live outside the namespace (stale flat installs).
 #   5. Dry-run — --dry-run prints what would happen without touching disk.
 #   6. Unchanged — tools/ are still chmod +x in-place (no contamination).
+#   7. Scope — --project installs into <repo>/.claude/commands/ instead of
+#      ~/.claude/commands/, so the /berkshire: commands are only visible to
+#      Claude Code sessions started inside this repository. Default stays
+#      global (~/.claude/commands/) for backward compatibility.
+#
+# Scope reference:
+#   Global  (default): ~/.claude/commands/berkshire/   → visible in every
+#                       Claude Code session on this machine, any project.
+#   Project (--project): <repo>/.claude/commands/berkshire/ → visible only
+#                       when Claude Code is opened at or below this repo's
+#                       root. Nothing is written outside the repo.
+#   CLAUDE_COMMANDS_DIR (env var) always wins over both if set explicitly.
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-DEST_BASE="${CLAUDE_COMMANDS_DIR:-$HOME/.claude/commands}"
 NAMESPACE="berkshire"
-DEST="$DEST_BASE/$NAMESPACE"
+PROJECT_MODE=false
 
 # ── helpers ─────────────────────────────────────────────────────────────────
 
@@ -28,17 +39,32 @@ Usage: $0 [flags]
 
 Flags:
   (none)              Install all 19 AI Berkshire skills under /berkshire:
+                       Scope: global — ~/.claude/commands/berkshire/
+                       (visible in every Claude Code session, any project)
+  --project            Install with project scope instead of global:
+                       <repo>/.claude/commands/berkshire/
+                       (visible only when Claude Code runs inside this repo)
   --only name,...     Install only the named skills (comma-separated)
   --skip name,...     Install all except the named skills
   --uninstall         Remove the /berkshire namespace and stale flat files
+                       (honors --project to target the same scope)
   --dry-run           Print what would be done without doing it
   -h, --help          Show this message
 
+Environment:
+  CLAUDE_COMMANDS_DIR  Explicit override for the commands directory.
+                       Takes priority over both the global default and
+                       --project. Example:
+                         CLAUDE_COMMANDS_DIR=/custom/path $0
+
 Examples:
-  $0                              # install everything
-  $0 --only investment-research   # single skill
+  $0                              # install everything, global scope
+  $0 --project                    # install everything, project-only scope
+  $0 --only investment-research   # single skill (global scope)
+  $0 --project --only investment-research   # single skill, project-only
   $0 --skip dyp-ask,wechat-article # all but those two
-  $0 --uninstall                  # clean removal
+  $0 --uninstall                  # clean removal (global scope)
+  $0 --project --uninstall        # clean removal (project scope)
 EOF
   exit 0
 }
@@ -55,6 +81,7 @@ while [[ $# -gt 0 ]]; do
     -h|--help) usage ;;
     --uninstall) MODE=uninstall ;;
     --dry-run) DRY_RUN=true ;;
+    --project) PROJECT_MODE=true ;;
     --only)
       [[ $# -gt 1 ]] || { echo "ERROR: --only requires a value"; exit 1; }
       IFS=',' read -r -a ONLY <<< "$2"; shift ;;
@@ -66,10 +93,25 @@ while [[ $# -gt 0 ]]; do
   shift
 done
 
+# ── resolve destination scope ────────────────────────────────────────────────
+# Priority: explicit CLAUDE_COMMANDS_DIR env var > --project > global default.
+
+if [[ -n "${CLAUDE_COMMANDS_DIR:-}" ]]; then
+  DEST_BASE="$CLAUDE_COMMANDS_DIR"
+  SCOPE_LABEL="custom (\$CLAUDE_COMMANDS_DIR)"
+elif $PROJECT_MODE; then
+  DEST_BASE="$ROOT/.claude/commands"
+  SCOPE_LABEL="project ($ROOT)"
+else
+  DEST_BASE="$HOME/.claude/commands"
+  SCOPE_LABEL="global (~/.claude/commands)"
+fi
+DEST="$DEST_BASE/$NAMESPACE"
+
 # ── uninstall ───────────────────────────────────────────────────────────────
 
 do_uninstall() {
-  echo "🧹 Uninstalling AI Berkshire Claude Code commands..."
+  echo "🧹 Uninstalling AI Berkshire Claude Code commands [scope: $SCOPE_LABEL]..."
 
   # 1) Remove the namespace directory
   if [[ -d "$DEST" ]]; then
@@ -107,7 +149,8 @@ do_uninstall() {
 # ── install ─────────────────────────────────────────────────────────────────
 
 do_install() {
-  echo "📦 Installing AI Berkshire Claude Code commands → /$NAMESPACE:..."
+  echo "📦 Installing AI Berkshire Claude Code commands → /$NAMESPACE:  [scope: $SCOPE_LABEL]"
+  echo "   Destination: $DEST"
 
   # Build the list of skills to install
   local skills=()
@@ -195,7 +238,15 @@ do_install() {
   echo "   /berkshire:investment-research Tesla"
   echo "   /berkshire:quality-screen Hang Seng Index"
   echo ""
-  echo "   Uninstall: $0 --uninstall"
+  if $PROJECT_MODE; then
+    echo "   Scope: project — these commands are only visible when Claude Code"
+    echo "   is opened at or below $ROOT"
+    echo "   Uninstall: $0 --project --uninstall"
+  else
+    echo "   Scope: global — these commands are visible in every Claude Code"
+    echo "   session on this machine. Use --project to scope them to this repo."
+    echo "   Uninstall: $0 --uninstall"
+  fi
 }
 
 # ── main ────────────────────────────────────────────────────────────────────
