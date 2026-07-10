@@ -1,5 +1,7 @@
 ---
-description: "AI Berkshire slash entry for 供应链瓶颈猎手：AI驱动的全球产业链瓶颈套利."
+description: |
+  Bottleneck hunter: finds physical bottlenecks and arbitrage opportunities in global supply chains from a megatrend.
+  Caza de cuellos de botella: identifica limitaciones físicas y oportunidades de arbitraje en cadenas de suministro globales a partir de una megatendencia.
 argument-hint: $ARGUMENTS
 ---
 

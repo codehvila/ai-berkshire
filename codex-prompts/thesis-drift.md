@@ -1,5 +1,7 @@
 ---
-description: "AI Berkshire slash entry for 投资论文漂移检测：分清事实变化与措辞变化."
+description: |
+  Thesis drift detection: separates factual changes from valuation changes and mere wording changes between two versions.
+  Detección de deriva de tesis: separa cambios de hechos, de valoración y de simple redacción entre dos versiones.
 argument-hint: $ARGUMENTS
 ---
 

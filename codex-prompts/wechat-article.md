@@ -1,5 +1,7 @@
 ---
-description: "AI Berkshire slash entry for 微信公众号文章：作者-编辑-读者三Agent协作."
+description: |
+  Article for blog/social media: three agents (writer, editor, reader) collaborate to produce publishable content.
+  Artículo para blog o redes: tres agentes (autor, editor, lector) colaboran para producir contenido publicable.
 argument-hint: $ARGUMENTS
 ---
 

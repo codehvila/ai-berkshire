@@ -1,5 +1,7 @@
 ---
-description: "AI Berkshire slash entry for 行业漏斗筛选：从全市场到 3 家的价值投资精选流程."
+description: |
+  Sector funnel: narrows the full market down to 3 finalists using value-investing criteria.
+  Embudo sectorial: del mercado completo a 3 finalistas mediante criterios de value investing.
 argument-hint: $ARGUMENTS
 ---
 

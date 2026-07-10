@@ -1,5 +1,7 @@
 ---
-description: "AI Berkshire slash entry for 未上市公司研究：多Agent并行深度研究框架."
+description: |
+  Multi-agent deep research on private (non-listed) companies, for cases with scarce information.
+  Investigación de empresas no cotizadas con múltiples agentes en paralelo, para casos de información escasa.
 argument-hint: $ARGUMENTS
 ---
 

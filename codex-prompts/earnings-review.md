@@ -1,5 +1,7 @@
 ---
-description: "AI Berkshire slash entry for 财报精读：一手资料深度解读."
+description: |
+  Deep-dive earnings reading from primary sources only, without relying on third-party analysis.
+  Lectura profunda de resultados financieros a partir de fuentes primarias, sin depender de análisis de terceros.
 argument-hint: $ARGUMENTS
 ---
 

@@ -1,5 +1,7 @@
 ---
-description: "AI Berkshire slash entry for 投资论文追踪：买入后的纪律系统."
+description: |
+  Investment thesis tracking: the post-purchase discipline system to check whether the thesis still holds.
+  Seguimiento de la tesis de inversión: disciplina post-compra para comprobar si sigue siendo válida.
 argument-hint: $ARGUMENTS
 ---
 

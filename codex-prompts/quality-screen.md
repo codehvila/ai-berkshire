@@ -1,5 +1,7 @@
 ---
-description: "AI Berkshire slash entry for 去劣筛选：7条指标快速排除非一流公司."
+description: |
+  Fast exclusion filter: 7 hard criteria to rule out companies that aren't first-tier.
+  Filtro de exclusión rápida: 7 indicadores duros para descartar empresas que no son de primer nivel.
 argument-hint: $ARGUMENTS
 ---
 

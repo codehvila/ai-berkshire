@@ -1,5 +1,7 @@
 ---
-description: "AI Berkshire slash entry for 投研团队：四角色并行分析框架."
+description: |
+  Research team with 4 parallel roles, each embodying a different master's perspective.
+  Equipo de investigación con 4 roles en paralelo, cada uno con la perspectiva de un maestro distinto.
 argument-hint: $ARGUMENTS
 ---
 

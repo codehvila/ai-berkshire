@@ -37,16 +37,66 @@ def yaml_quote(value: str) -> str:
     return f'"{value}"'
 
 
+def extract_description(frontmatter_text: str) -> str | None:
+    """Extract the `description:` value from a source frontmatter block.
+
+    Supports both an inline value (`description: text` or quoted) and a
+    YAML block-literal value (`description: |` followed by indented
+    lines), without depending on a YAML library, to keep this script
+    dependency-free.
+    """
+    lines = frontmatter_text.splitlines()
+    for i, line in enumerate(lines):
+        if not line.startswith("description:"):
+            continue
+        rest = line[len("description:") :].strip()
+        if rest in ("|", "|-", ">", ">-", ""):
+            collected: list[str] = []
+            indent: int | None = None
+            for nxt in lines[i + 1 :]:
+                if nxt.strip() == "":
+                    collected.append("")
+                    continue
+                stripped = nxt.lstrip()
+                cur_indent = len(nxt) - len(stripped)
+                if indent is None:
+                    indent = cur_indent
+                if cur_indent < indent:
+                    break
+                collected.append(nxt[indent:])
+            value = "\n".join(collected).rstrip()
+            return value or None
+        if (rest.startswith('"') and rest.endswith('"')) or (
+            rest.startswith("'") and rest.endswith("'")
+        ):
+            rest = rest[1:-1]
+        return rest or None
+    return None
+
+
+def format_description_field(description: str) -> str:
+    """Render a `description:` frontmatter field, using a block literal
+    when the value spans multiple lines (e.g. bilingual descriptions)."""
+    if "\n" in description:
+        indented = "\n".join(
+            f"  {line}" if line else "" for line in description.split("\n")
+        )
+        return "description: |\n" + indented + "\n"
+    return f"description: {yaml_quote(description)}\n"
+
+
 def prompt_for(source: Path) -> str:
     name = source.stem
     source_text = source.read_text(encoding="utf-8")
-    _, body = split_frontmatter(source_text)
-    title = first_heading(body, name)
-    description = f"AI Berkshire slash entry for {title}."
+    existing, body = split_frontmatter(source_text)
+    description = extract_description(existing) if existing else None
+    if not description:
+        title = first_heading(body, name)
+        description = f"AI Berkshire slash entry for {title}."
     return (
         "---\n"
-        f"description: {yaml_quote(description)}\n"
-        "argument-hint: $ARGUMENTS\n"
+        + format_description_field(description)
+        + "argument-hint: $ARGUMENTS\n"
         "---\n\n"
         f"Use the installed AI Berkshire Codex skill `{name}` for this request.\n\n"
         f"If the skill is not already loaded, read and follow "

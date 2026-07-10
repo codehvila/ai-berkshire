@@ -1,5 +1,7 @@
 ---
-description: "AI Berkshire slash entry for 投资研究：巴菲特-芒格-段永平-李录 四大师综合分析框架."
+description: |
+  Comprehensive investment analysis using the 4-master framework: Buffett, Munger, Duan Yongping, and Li Lu.
+  Análisis de inversión integral con el marco de los 4 maestros: Buffett, Munger, Duan Yongping y Li Lu.
 argument-hint: $ARGUMENTS
 ---
 

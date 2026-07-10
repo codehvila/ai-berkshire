@@ -1,5 +1,7 @@
 ---
-description: "AI Berkshire slash entry for 行业投资研究：产业链全景扫描 + 四大师个股分析框架."
+description: |
+  Sector research: value-chain landscape plus 4-master analysis of the key companies.
+  Investigación sectorial: panorama de la cadena de valor más análisis de las empresas clave con los 4 maestros.
 argument-hint: $ARGUMENTS
 ---
 

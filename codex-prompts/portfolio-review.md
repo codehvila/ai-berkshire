@@ -1,5 +1,7 @@
 ---
-description: "AI Berkshire slash entry for 组合管理：从\"研究公司\"到\"管理组合\"."
+description: |
+  Portfolio management: from researching one company to managing a portfolio — sizing, concentration, and rebalancing.
+  Gestión de cartera: de investigar una empresa a gestionar una cartera — posición, concentración y rebalanceo.
 argument-hint: $ARGUMENTS
 ---
 

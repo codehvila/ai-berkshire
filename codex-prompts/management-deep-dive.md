@@ -1,5 +1,7 @@
 ---
-description: "AI Berkshire slash entry for 管理层纵深研究：买股票就是买人."
+description: |
+  Deep dive on the management team: buying a stock is buying the people behind it.
+  Investigación en profundidad del equipo directivo: comprar acciones es comprar personas.
 argument-hint: $ARGUMENTS
 ---
 

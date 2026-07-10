@@ -1,5 +1,7 @@
 ---
-description: "AI Berkshire slash entry for 财务数据获取与交叉验证规范."
+description: |
+  Rules for sourcing and cross-validating financial data (at least 2 independent sources).
+  Normas de obtención y validación cruzada de datos financieros (mínimo 2 fuentes independientes).
 argument-hint: $ARGUMENTS
 ---
 

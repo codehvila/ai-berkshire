@@ -1,6 +1,8 @@
 ---
 name: thesis-drift
-description: "AI Berkshire skill: 投资论文漂移检测：分清事实变化与措辞变化. Source: skills/thesis-drift.md."
+description: |
+  Thesis drift detection: separates factual changes from valuation changes and mere wording changes between two versions.
+  Detección de deriva de tesis: separa cambios de hechos, de valoración y de simple redacción entre dos versiones.
 ---
 
 ## Codex adapter note
@@ -18,6 +20,7 @@ This skill is generated from `skills/thesis-drift.md` so Claude Code and Codex u
 对 $ARGUMENTS 执行投资论文漂移检测。
 
 **支持输入格式**：
+
 - `公司名 旧报告路径 新报告路径` — 指定两份研究报告或论文快照进行对比
 - `公司名 reports/{公司名}-thesis-旧日期.md reports/{公司名}-thesis-新日期.md` — 对比两份带日期的论文快照
 - `公司名` — 自动查找 `reports/{公司名}-thesis.md` 及同目录历史快照；如果没有基线则转入缺失基线处理
@@ -29,6 +32,7 @@ This skill is generated from `skills/thesis-drift.md` so Claude Code and Codex u
 ## 设计理念
 
 长期持仓最难的不是每天读新闻，而是区分三件事：
+
 - **事实改变**：收入、利润率、竞争格局、管理层行为、资本配置发生可验证变化
 - **价格改变**：市场情绪或估值倍数变化，但生意本身未变
 - **措辞改变**：两份报告表达不同，但底层证据和判断没有变化
@@ -42,6 +46,7 @@ This skill is generated from `skills/thesis-drift.md` so Claude Code and Codex u
 ### 第一步：判断操作模式
 
 解析 `$ARGUMENTS`：
+
 - 如果提供两份报告路径 → 进入**指定报告对比**模式
 - 如果只提供公司名 → 查找 `reports/{公司名}-thesis.md` 及历史快照，进入**自动快照对比**模式
 - 如果只找到一份报告或没有历史基线 → 进入**缺失基线处理**模式
@@ -54,6 +59,7 @@ This skill is generated from `skills/thesis-drift.md` so Claude Code and Codex u
 ### A1：读取并校验两份报告
 
 读取旧报告和新报告，提取：
+
 - 报告日期、公司名、股票代码
 - 核心论文（5句话）
 - 核心假设清单
@@ -70,13 +76,13 @@ This skill is generated from `skills/thesis-drift.md` so Claude Code and Codex u
 
 把两份报告中的事实证据整理成同一张表：
 
-| 维度 | 旧报告证据 | 新报告证据 | 数据来源 | 是否可验证 |
-|------|-----------|-----------|---------|-----------|
-| 估值锚点 | | | | |
-| 核心假设 | | | | |
-| 红线 | | | | |
-| 管理层质量 | | | | |
-| 竞争护城河 | | | | |
+| 维度       | 旧报告证据 | 新报告证据 | 数据来源 | 是否可验证 |
+| ---------- | ---------- | ---------- | -------- | ---------- |
+| 估值锚点   |            |            |          |            |
+| 核心假设   |            |            |          |            |
+| 红线       |            |            |          |            |
+| 管理层质量 |            |            |          |            |
+| 竞争护城河 |            |            |          |            |
 
 **只比较证据，不比较文风。** 如果新旧报告只是同义改写、排序变化、语气变化，但事实数据和判断阈值没有变化，判定为 Unchanged。
 
@@ -107,19 +113,20 @@ python3 tools/financial_rigor.py calc --expr '{精确算式}'
 
 固定使用以下维度，不要临时增减：
 
-| 维度 | 判定重点 | Improved | Unchanged | Weakened |
-|------|---------|----------|-----------|----------|
-| 估值锚点 | 内在价值、PE/PB/FCF Yield、安全边际、目标价区间 | 安全边际扩大或内在价值上修且经工具验算 | 估值区间和安全边际无实质变化 | 安全边际收窄、内在价值下修或估值假设失效 |
-| 核心假设清单 | 收入增速、利润率、现金流、用户/订单/产能等可验证假设 | 更多假设被新证据强化 | 假设状态与证据基本一致 | 假设边际弱化、受损或破裂 |
-| 红线清单 | 诚信、监管、业务衰退、竞争突破、管理层异常动作 | 原有红线风险解除或显著下降 | 未触发且风险水平不变 | 红线被触发或触发概率上升 |
-| 管理层质量 | 诚信、资本配置、回购分红、执行力、股东友好度 | 新行为提高信任度 | 行为延续旧判断 | 行为损害信任或资本配置变差 |
-| 竞争护城河 | 市占率、定价权、网络效应、成本优势、替代威胁 | 护城河变宽或竞争优势被验证 | 格局无实质变化 | 护城河被削弱或竞对突破 |
+| 维度         | 判定重点                                             | Improved                               | Unchanged                    | Weakened                                 |
+| ------------ | ---------------------------------------------------- | -------------------------------------- | ---------------------------- | ---------------------------------------- |
+| 估值锚点     | 内在价值、PE/PB/FCF Yield、安全边际、目标价区间      | 安全边际扩大或内在价值上修且经工具验算 | 估值区间和安全边际无实质变化 | 安全边际收窄、内在价值下修或估值假设失效 |
+| 核心假设清单 | 收入增速、利润率、现金流、用户/订单/产能等可验证假设 | 更多假设被新证据强化                   | 假设状态与证据基本一致       | 假设边际弱化、受损或破裂                 |
+| 红线清单     | 诚信、监管、业务衰退、竞争突破、管理层异常动作       | 原有红线风险解除或显著下降             | 未触发且风险水平不变         | 红线被触发或触发概率上升                 |
+| 管理层质量   | 诚信、资本配置、回购分红、执行力、股东友好度         | 新行为提高信任度                       | 行为延续旧判断               | 行为损害信任或资本配置变差               |
+| 竞争护城河   | 市占率、定价权、网络效应、成本优势、替代威胁         | 护城河变宽或竞争优势被验证             | 格局无实质变化               | 护城河被削弱或竞对突破                   |
 
 每个维度只能给出三类结论：**Improved / Unchanged / Weakened**。
 
 ### A5：证据驱动规则
 
 每个非 Unchanged 的结论必须引用导致变化的具体新证据：
+
 - 财报行项目：例如收入增速、毛利率、经营现金流、回购金额、净现金
 - 监管披露：例如 10-K/20-F、年报、中报、港交所公告、SEC filing
 - 新闻事件：例如管理层变动、监管处罚、重大客户流失、竞品突破
@@ -144,13 +151,13 @@ python3 tools/financial_rigor.py calc --expr '{精确算式}'
 
 #### 维度漂移表
 
-| 维度 | 旧判断 | 新判断 | 漂移方向 | 触发证据 | 置信度 |
-|------|-------|-------|:--------:|---------|:------:|
-| 估值锚点 | | | Improved / Unchanged / Weakened | | 高/中/低 |
-| 核心假设清单 | | | Improved / Unchanged / Weakened | | 高/中/低 |
-| 红线清单 | | | Improved / Unchanged / Weakened | | 高/中/低 |
-| 管理层质量 | | | Improved / Unchanged / Weakened | | 高/中/低 |
-| 竞争护城河 | | | Improved / Unchanged / Weakened | | 高/中/低 |
+| 维度         | 旧判断 | 新判断 |            漂移方向             | 触发证据 |  置信度  |
+| ------------ | ------ | ------ | :-----------------------------: | -------- | :------: |
+| 估值锚点     |        |        | Improved / Unchanged / Weakened |          | 高/中/低 |
+| 核心假设清单 |        |        | Improved / Unchanged / Weakened |          | 高/中/低 |
+| 红线清单     |        |        | Improved / Unchanged / Weakened |          | 高/中/低 |
+| 管理层质量   |        |        | Improved / Unchanged / Weakened |          | 高/中/低 |
+| 竞争护城河   |        |        | Improved / Unchanged / Weakened |          | 高/中/低 |
 
 **Unchanged 行的触发证据写 `—`，不要为了填表编造证据。**
 
@@ -169,6 +176,7 @@ python3 tools/financial_rigor.py calc --expr '{精确算式}'
 ### B1：查找快照
 
 在 `reports/` 中查找：
+
 - `reports/{公司名}-thesis.md`
 - `reports/{公司名}-thesis-*.md`
 - `reports/{公司名}/` 目录下包含 `thesis`、`论文`、`追踪` 的报告
@@ -178,6 +186,7 @@ python3 tools/financial_rigor.py calc --expr '{精确算式}'
 ### B2：防止错误配对
 
 对比前必须确认：
+
 - 公司名或股票代码一致
 - 报告日期不同
 - 两份报告都包含可抽取的论文结构或研究结论

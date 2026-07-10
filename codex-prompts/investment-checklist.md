@@ -1,5 +1,7 @@
 ---
-description: "AI Berkshire slash entry for 巴菲特价值投资买入前 Checklist."
+description: |
+  Buffett's pre-purchase checklist: 6 quick gates to decide whether a company deserves deeper research.
+  Checklist de Buffett previo a comprar: 6 filtros rápidos para decidir si vale la pena investigar a fondo.
 argument-hint: $ARGUMENTS
 ---
 

@@ -1,5 +1,7 @@
 ---
-description: "AI Berkshire slash entry for 段永平问答：以他的方式思考."
+description: |
+  Answers any question thinking like Duan Yongping: business, investing, and life.
+  Responde cualquier pregunta pensando como Duan Yongping (段永平): negocios, inversión y vida.
 argument-hint: $ARGUMENTS
 ---
 

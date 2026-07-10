@@ -1,5 +1,7 @@
 ---
-description: "AI Berkshire slash entry for 公司新闻脉搏：股价异动快速归因团队."
+description: |
+  Fast attribution of price moves: 4 parallel agents watch company events, regulation, competitors, and market sentiment.
+  Atribución rápida de movimientos de precio: 4 agentes en paralelo vigilan eventos, regulación, competencia y sentimiento de mercado.
 argument-hint: $ARGUMENTS
 ---
 

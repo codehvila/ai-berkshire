@@ -1,3 +1,10 @@
+---
+name: investment-research
+description: |
+  Comprehensive investment analysis using the 4-master framework: Buffett, Munger, Duan Yongping, and Li Lu.
+  Análisis de inversión integral con el marco de los 4 maestros: Buffett, Munger, Duan Yongping y Li Lu.
+---
+
 # 投资研究：巴菲特-芒格-段永平-李录 四大师综合分析框架
 
 对 $ARGUMENTS 进行系统化投资研究分析。
@@ -19,12 +26,14 @@
 
 **C级公司的第一性原理研究法**：
 当公开资料不足时，不要试图拼凑出"看起来完整"的报告，而是聚焦以下底层问题：
+
 1. 客户是谁？为什么付钱？有没有替代选择？
 2. 复购靠什么驱动？是习惯、锁定、还是持续创造新价值？
 3. 竞争对手拿100亿能复制这门生意吗？
 4. 管理层做过什么关键决策？这些决策反映了什么判断力和价值观？
 
 **偏见自查清单**（研究全程保持警惕）：
+
 - [ ] 我的"确定性"感受是来自生意本质，还是来自资料数量？
 - [ ] 如果把这家公司的资料量减少一半，我的结论会变吗？
 - [ ] AI输出的分析是否与市场共识高度雷同？如果是，我的信息优势在哪？
@@ -35,6 +44,7 @@
 ### 第一步：数据收集
 
 > **数据源规范**：参见 `skills/financial-data.md`。所有财务数据必须来自两个独立来源，误差>1%须标记。
+>
 > - 美股：macrotrends（主）+ stockanalysis（副）
 > - 港股：aastocks（主）+ macrotrends ADR（副）
 > - A股：东方财富（主）+ 巨潮资讯（副）
@@ -57,6 +67,7 @@
 数据收集完成后，**必须调用 `tools/financial_rigor.py` 对关键数据进行程序化验证**，杜绝LLM心算误差。
 
 **必须验证的数据点**：
+
 - 总股本（从交易所、Yahoo Finance、StockAnalysis 等至少2个源确认）
 - 当前股价和市值（**手动计算 股价×总股本 并与报告市值对比，防止单位错误**）
 - 最近财年收入和净利润（从公司年报+至少1个第三方源确认）
@@ -66,25 +77,30 @@
 **强制验证步骤（使用Bash调用工具）**：
 
 Step 1 — 市值验算（精确十进制，非浮点）：
+
 ```bash
 python3 tools/financial_rigor.py verify-market-cap \
   --price {股价} --shares {总股本} --reported {报告市值} --currency {币种}
 ```
 
 Step 2 — 关键数据多源交叉验证：
+
 ```bash
 python3 tools/financial_rigor.py cross-validate \
   --field {字段名} --values '{"来源1": 数值, "来源2": 数值}' --unit {单位}
 ```
+
 对收入、净利润、现金储备分别执行。
 
 Step 3 — 估值指标精确验算（PE/PB/ROE/FCF Yield 等）：
+
 ```bash
 python3 tools/financial_rigor.py verify-valuation \
   --price {股价} --eps {EPS} --bvps {每股净资产} --fcf-per-share {每股FCF} --dividend {每股股息}
 ```
 
 **验证规则**：
+
 1. 每个关键数据点至少2个独立来源
 2. 发现来源间有差异时，优先采用公司年报/交易所数据，并注明差异原因
 3. **所有涉及计算的数据必须通过工具验算，禁止LLM心算**
@@ -92,6 +108,7 @@ python3 tools/financial_rigor.py verify-valuation \
 5. 如果工具报告 ❌ 偏差过大，必须排查原因后才能继续分析
 
 **常见错误防范**：
+
 - 市值单位：港币亿 vs 人民币亿 vs 美元亿，容易漏写/多写一个零
 - FCF口径：不同来源对资本支出的定义可能不同（是否含租赁、收购等）
 - 债务口径：是否包含经营租赁负债
@@ -100,6 +117,7 @@ python3 tools/financial_rigor.py verify-valuation \
 ### 第二步：生意本质分析 — 段永平"对的生意"
 
 分析要点：
+
 - 用一句话定义这门生意的本质
 - 收入结构拆解（图表）
 - 5年盈利能力趋势（图表）
@@ -113,13 +131,13 @@ python3 tools/financial_rigor.py verify-valuation \
 
 逐一验证五类护城河：
 
-| 护城河类型 | 验证方法 |
-|-----------|---------|
-| 品牌/定价权 | 是否能在不损失销量的情况下提价？ |
-| 转换成本 | 客户迁移到竞品的成本有多高？ |
-| 网络效应 | 用户越多产品越好吗？ |
-| 规模效应 | 规模带来的成本优势有多大？ |
-| 技术/专利壁垒 | 技术领先几年？能否被复制？ |
+| 护城河类型    | 验证方法                         |
+| ------------- | -------------------------------- |
+| 品牌/定价权   | 是否能在不损失销量的情况下提价？ |
+| 转换成本      | 客户迁移到竞品的成本有多高？     |
+| 网络效应      | 用户越多产品越好吗？             |
+| 规模效应      | 规模带来的成本优势有多大？       |
+| 技术/专利壁垒 | 技术领先几年？能否被复制？       |
 
 分析护城河趋势：过去5年变宽还是变窄？未来5年预判。
 
@@ -161,12 +179,14 @@ python3 tools/financial_rigor.py verify-valuation \
 - 当前市场定价（关键估值指标表格）—— **必须通过工具验算**
 - 反向DCF：当前股价隐含了什么增长预期？
 - 三情景估值 —— **必须通过工具精确计算，禁止心算**：
+
 ```bash
 python3 tools/financial_rigor.py three-scenario \
   --price {股价} --eps {EPS} --shares {总股本亿} \
   --growth {乐观增速} {中性增速} {悲观增速} \
   --pe {乐观PE} {中性PE} {悲观PE} --years 3 --currency {币种}
 ```
+
 - 与自身历史估值对比
 - 与同行估值对比
 
@@ -176,23 +196,23 @@ python3 tools/financial_rigor.py three-scenario \
 
 汇总表格：
 
-| 维度 | 结论 | 信心度 |
-|------|------|--------|
-| 生意质量（段永平） | | |
-| 护城河（巴菲特） | | |
-| 管理层（段永平+巴菲特） | | |
-| 最大风险（芒格） | | |
-| 文明趋势（李录） | | |
-| 估值（巴菲特+段永平） | | |
+| 维度                    | 结论 | 信心度 |
+| ----------------------- | ---- | ------ |
+| 生意质量（段永平）      |      |        |
+| 护城河（巴菲特）        |      |        |
+| 管理层（段永平+巴菲特） |      |        |
+| 最大风险（芒格）        |      |        |
+| 文明趋势（李录）        |      |        |
+| 估值（巴菲特+段永平）   |      |        |
 
 最终决策表格：
 
-| 策略 | 建议 |
-|------|------|
-| 空仓者 | |
-| 持仓者 | |
-| 卖出信号 | |
-| 加仓信号 | |
+| 策略     | 建议 |
+| -------- | ---- |
+| 空仓者   |      |
+| 持仓者   |      |
+| 卖出信号 |      |
+| 加仓信号 |      |
 
 四位大师的模拟点评（用引用格式）。
 
@@ -213,10 +233,12 @@ python3 tools/financial_rigor.py three-scenario \
 报告写入文件后，**必须**执行数据抽检，通过后方可发布：
 
 **Step 1 — 提取抽检清单（15%随机抽样）：**
+
 ```bash
 python3 tools/report_audit.py extract \
   --report <报告文件路径>
 ```
+
 输出 JSON 模板，每项含 `fetched_value`（待填）。
 
 **Step 2 — 取数核验：**
@@ -225,6 +247,7 @@ python3 tools/report_audit.py extract \
 填入 `fetched_value` / `fetched_source` / `fetched_value2` / `fetched_source2`。
 
 **Step 3 — 输出判决：**
+
 ```bash
 python3 tools/report_audit.py verdict \
   --results '<填好的JSON>' \

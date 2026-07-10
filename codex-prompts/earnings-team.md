@@ -1,5 +1,7 @@
 ---
-description: "AI Berkshire slash entry for 财报精读团队：四大师并行解读 + 公众号发布."
+description: |
+  Four master perspectives analyze earnings in parallel, with a final editorial pass for publication.
+  Equipo de 4 maestros analizando resultados en paralelo, con edición final para publicación.
 argument-hint: $ARGUMENTS
 ---
 

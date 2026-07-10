@@ -1,5 +1,7 @@
 ---
-description: "AI Berkshire slash entry for 深度公司系列：8 篇长文拆一家公司."
+description: |
+  An 8-part long-form series that dissects one company in depth, for blog/newsletter publication.
+  Serie de 8 artículos largos que desmontan una empresa en profundidad, para publicación en blog/newsletter.
 argument-hint: $ARGUMENTS
 ---
 
