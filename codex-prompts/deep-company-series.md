@@ -1,7 +1,7 @@
 ---
 description: |
-  An 8-part long-form series that dissects one company in depth, for blog/newsletter publication.
-  Serie de 8 artículos largos que desmontan una empresa en profundidad, para publicación en blog/newsletter.
+  A 3-8 part long-form series (chapter count adapts to company complexity) that dissects one company in depth, for blog/newsletter publication.
+  Serie de 3-8 artículos largos (el número de capítulos se adapta a la complejidad de la empresa) que desmontan una empresa en profundidad, para publicación en blog/newsletter.
 argument-hint: $ARGUMENTS
 ---
 
