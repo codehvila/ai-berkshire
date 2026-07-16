@@ -29,12 +29,12 @@
 | # | Hipótesis clave | Forma de verificación | Frecuencia de verificación | Estado actual |
 |---|---|---|---|---|
 | 1 | El liderazgo de ejecución sobre Samsung e Intel en nodos de vanguardia se mantiene (ningún competidor captura un cliente ancla de nodo avanzado) | Anuncios de clientes, informes de rendimiento (yield) de Samsung SF2/Intel 18A | Cada semestre | 🟢 Cumple (N2 en producción según calendario, ~15 clientes confirmados) |
-| 2 | HPC/IA sigue creciendo sin que el ciclo de capex de los hiperescaladores gire de forma abrupta | Ingresos por plataforma en resultados trimestrales | Cada trimestre | 🟢 Cumple (HPC 58% de ingresos, +48% en FY2025) |
-| 3 | La concentración de clientes (Nvidia+Apple 36%) no se traduce en un recorte material de pedidos de ninguno de los dos | Comentarios de resultados, pedidos de Nvidia/Apple | Cada trimestre | 🟢 Cumple (Nvidia con order book >95.000 M$ hasta 2027) |
-| 4 | El margen bruto se mantiene ≥56% (objetivo "a través del ciclo" de la propia compañía) | Margen bruto en resultados trimestrales | Cada trimestre | 🟢 Cumple (59,9% FY2025; 66,2% en 1T2026, por encima del objetivo) |
+| 2 | HPC/IA sigue creciendo sin que el ciclo de capex de los hiperescaladores gire de forma abrupta | Ingresos por plataforma en resultados trimestrales | Cada trimestre | 🟢 **Reforzada** (2T2026: HPC 66% de ingresos, +20% QoQ; guía FY2026 elevada a >+40%) |
+| 3 | La concentración de clientes (Nvidia+Apple 36%) no se traduce en un recorte material de pedidos de ninguno de los dos | Comentarios de resultados, pedidos de Nvidia/Apple | Cada trimestre | 🟢 Cumple (sin datos nuevos por cliente en 2T2026; sin señales de recorte) |
+| 4 | El margen bruto se mantiene ≥56% (objetivo "a través del ciclo" de la propia compañía) | Margen bruto en resultados trimestrales | Cada trimestre | 🟢 Cumple (67,7% en 2T2026, pico local; dilución guiada N2+fabs deja suelo implícito ~60% > 56%) |
 | 5 | La expansión geográfica forzada (Arizona, Japón, Alemania) no diluye la rentabilidad de forma material | Resultados de las filiales (ej. JASM Kumamoto), guía de capex | Cada semestre | 🟢 Cumple (Kumamoto alcanzó su primer trimestre de beneficio en 1T2026) |
 | 6 | No hay escalada geopolítica material en el Estrecho de Taiwán | Noticias geopolíticas, comunicados oficiales de gobiernos relevantes | Continuo | 🟢 Sin escalada a la fecha (riesgo de cola, no verificable con datos financieros) |
-| 7 | El crecimiento de ingresos se mantiene en línea con la guía propia (~25% CAGR 2024-2029) sin que el precio ya exija más de lo guiado | Ingresos y guía trimestral/anual | Cada trimestre | 🟢 Cumple (guía FY2026: +30% YoY en USD, dada en abr-2026) |
+| 7 | El crecimiento de ingresos se mantiene en línea con la guía propia (~25% CAGR 2024-2029) sin que el precio ya exija más de lo guiado | Ingresos y guía trimestral/anual | Cada trimestre | 🟢 **Reforzada** (guía FY2026 elevada el 16-jul-2026 a "ligeramente por encima de +40%" YoY en USD, desde +30%) |
 
 ---
 
@@ -75,11 +75,12 @@
 | Fecha de revisión | Salud de la tesis | Cambio clave | Acción recomendada |
 |---|---|---|---|
 | — | — | — | Tesis recién establecida; primera revisión inmediata tras los resultados del 2T2026 (16-jul-2026, día siguiente) |
+| 2026-07-16 | **10/10** (0 hipótesis rotas/dañadas/debilitadas, 0 líneas rojas activadas) | Resultados 2T2026: ingresos 40,20 B$ (tope de guía), MB 67,7% (supera guía), **guía FY2026 elevada de +30% a >+40% YoY (USD)** y capex 2026 elevado a 60–64 B$; beneficio récord con one-off de Vanguard (~63,2 B NT$) dentro; hipótesis #2 y #7 **reforzadas**; MB en pico local (dilución guiada N2 −3/4 pp + fabs extranjeras); prima ADR ~6,8% (no simultánea; antes ~15%). Ver `TSMC-earnings-2026Q2.md` | Mantener en watchlist con sesgo constructivo; ADR −3,56% post-resultados acerca marginalmente el precio a zona de entrada sin alcanzarla; medir prima ADR con precios simultáneos el 17-jul; próxima revisión: resultados 3T2026 (~mediados de octubre, primera prueba real de la dilución N2) |
 
 ---
 
 ## Próxima revisión
 
-**Cuándo**: **16 de julio de 2026** — TSMC publica resultados del 2T2026 al día siguiente de esta tesis. Es, junto con ASML, una de las revisiones más inmediatas del repositorio.
+**Cuándo**: **~mediados de octubre de 2026** — resultados del 3T2026. (La revisión del 2T2026 se completó el 16-jul-2026, ver `TSMC-earnings-2026Q2.md`.)
 
-**Puntos a vigilar especialmente**: (1) guía de 3T2026 y cualquier comentario sobre sostenibilidad del capex de IA de los hiperescaladores; (2) evolución del margen bruto real vs. objetivo ≥56%; (3) avance de rendimientos (yields) de N2; (4) cualquier noticia geopolítica relevante sobre Taiwán; (5) resolución (si la hay) de la prima del 15% del ADR documentada en el informe de investigación.
+**Puntos a vigilar especialmente**: (1) margen bruto real del 3T vs. guía 65–67% — primera prueba cuantitativa de la dilución de la rampa N2 (−3/4 pp guiados); (2) si la guía FY2026 de >+40% se cumple en los informes mensuales de ingresos (ago/sep); (3) datos de rendimientos (yields) de N2, aún no publicados cuantitativamente; (4) concentración de clientes (Nvidia/Apple) cuando haya datos; (5) prima del ADR con precios simultáneos (6,82% no simultánea el 16-jul, vs. ~15% el 12-jul); (6) cualquier noticia geopolítica relevante sobre Taiwán.
