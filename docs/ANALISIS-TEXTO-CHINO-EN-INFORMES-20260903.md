@@ -53,9 +53,23 @@ Las 18 líneas de prosa tampoco son error:
 
 ## Verificación de fidelidad (3-sep-2026)
 
-Se comprobó que la tabla española reproduce fielmente el bloque chino. Método: las tres
+Se comprobó que las cifras presentes en ambas tablas coinciden. Método: las tres
 filas de escenario parten del mismo EPS actual, así que cada una debe implicar el mismo
 EPS base al deshacer `EPS_obj / (1+g)³`.
+
+**Matiz de cobertura:** la tabla española tiene **5 columnas frente a las 6 del bloque
+chino** en los 6 informes — omite `目标EPS` (EPS objetivo). No es pérdida de información:
+se recupera como `precio objetivo ÷ PER`, verificado en las 18 filas. Es una simplificación
+editorial (el EPS objetivo es un paso intermedio del cálculo).
+
+| Columna china | Equivalente español |
+|---|---|
+| `情景` | Escenario |
+| `年增速` | Crecimiento anual EPS |
+| `目标PE` | PER objetivo |
+| **`目标EPS`** | **ausente — derivable como precio ÷ PER** |
+| `目标股价` | Precio objetivo |
+| `涨跌幅` | Retorno |
 
 | Informe | EPS base implícito (Bull / Base / Bear) | Coherente |
 |---|---|---|
@@ -118,7 +132,32 @@ en `CLAUDE.md`.
 Con salida estructurada, el envoltorio se reduce a un formateador sin regex frágiles, y
 el mantenimiento pasa al autor original.
 
-## Decisión
+## Decisión (3-sep-2026)
 
-No se actúa. El comportamiento actual cumple la política de idioma y la tabla en español
-es fiel (y en un caso, más precisa) respecto al bloque chino.
+**Informes existentes: no se tocan.** El comportamiento actual cumple la política de idioma
+y la tabla en español es fiel (y en un caso, más precisa) respecto al bloque chino. La
+columna `目标EPS` ausente es derivable y su omisión no invalida ninguna conclusión.
+
+**Informes futuros: la transcripción española debe conservar todos los datos.** Regla
+añadida a la Report Language Policy de `CLAUDE.md`, que es el punto de anulación correcto:
+los 7 skills que invocan `financial_rigor.py` son del upstream y editarlos costaría un
+conflicto en cada sincronización, mientras que esa sección de `CLAUDE.md` es propia, se
+fusiona limpiamente y ya declara prioridad sobre los skills.
+
+La misma nota advierte del redondeo de `:>7.0f`, para que la tabla traducida escriba el
+crecimiento realmente pasado a la herramienta y no el valor truncado del bloque chino.
+
+### Alcance de la regla
+
+**Por tipo de informe:** al vivir en `CLAUDE.md` la regla es global, no exclusiva de
+`/investment-research`. Alcanza a los 7 skills que invocan `financial_rigor.py`
+(`investment-team`, `investment-checklist`, `earnings-team`, `earnings-review`,
+`portfolio-review`, `management-deep-dive`), y por tanto a los informes `earnings-*`,
+`management-*`, `thesis` y `private` además de los `research`.
+
+**Por subcomando:** solo dos emiten tablas con columnas — `three-scenario` (6 columnas) y
+`benford` (4: `首位数`/`观测`/`Benford期望`/`偏差`). Los otros cuatro
+(`verify-market-cap`, `verify-valuation`, `cross-validate`, `calc`) emiten líneas
+etiquetadas, no tablas. La regla se redactó como «todas las columnas **o líneas de datos**»
+precisamente para que también les alcance: una redacción limitada a «columnas» los habría
+dejado fuera sin decirlo.

@@ -8,6 +8,14 @@
 - `reports/` 下的公司文件夹名和文件名必须使用拉丁字母的公司名
   （例如 `reports/tencent/tencent-research-20260709.md`，而不是 `reports/腾讯/...`）。
 - 嵌入 `tools/` 输出（如 `financial_rigor.py`、`report_audit.py`）时，在报告正文中将校验结果转写为西班牙语；工具原始输出本身可保持不变。
+  **西班牙语译表必须保留工具输出的全部列或全部数据行，不得省略任何一项。**
+  有列的子命令：`three-scenario`（6 列）与 `benford`（4 列：`首位数`/`观测`/`Benford期望`/`偏差`）；
+  其余子命令（`verify-market-cap`、`verify-valuation`、`cross-validate`、`calc`）输出的是带标签的数据行，
+  同样要逐行转写，不得挑选。例如 `three-scenario` 的六列必须完整对应：
+  `情景`→Escenario、`年增速`→Crecimiento anual EPS、`目标PE`→PER objetivo、`目标EPS`→**EPS objetivo**、
+  `目标股价`→Precio objetivo、`涨跌幅`→Retorno。（既有报告不追溯修改，仅适用于新报告。）
+  注意 `financial_rigor.py:357` 用 `:>7.0f` 打印增速，会丢掉小数位（如 6.5% 打印成 6%）；
+  译表应写实际传入的数值，而非中文块打印出来的取整值。
 - 金额单位使用 M / B（百万/十亿）而非 亿 / 万亿，报告为西班牙语时采用欧洲数字格式。
 
 ## 项目概述
