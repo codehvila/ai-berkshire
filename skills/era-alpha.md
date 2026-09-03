@@ -1,3 +1,10 @@
+---
+name: era-alpha
+description: |
+  Era alpha hunter: four-step framework to identify, verify and hold the alpha companies of a high-growth core industry, with entry and exit discipline.
+  Cazador del alfa de época: marco de cuatro pasos para identificar, verificar y mantener las empresas alfa de un sector núcleo de alto crecimiento, con disciplina de entrada y salida.
+---
+
 # 时代α捕手：高增长核心资产的识别-验证-持有框架
 
 对 $ARGUMENTS 行业/方向执行"时代α四步法"：建立行业认知地图 → 自问核心问题 → 全方位验证 → 持有到拐点。目标是找出当下最核心高增长行业中真正有定价权、有壁垒、能持续跑赢同行的 α 企业，并给出介入与退出纪律。

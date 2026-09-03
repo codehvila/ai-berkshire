@@ -1,5 +1,7 @@
 ---
-description: "AI Berkshire slash entry for 时代α捕手：高增长核心资产的识别-验证-持有框架."
+description: |
+  Era alpha hunter: four-step framework to identify, verify and hold the alpha companies of a high-growth core industry, with entry and exit discipline.
+  Cazador del alfa de época: marco de cuatro pasos para identificar, verificar y mantener las empresas alfa de un sector núcleo de alto crecimiento, con disciplina de entrada y salida.
 argument-hint: $ARGUMENTS
 ---
 
