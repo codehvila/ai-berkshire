@@ -98,6 +98,66 @@ El precio objetivo de 22,8 € está calculado con 6,5%, y el 6,54% aparece deri
 anexo A.6 del propio informe. **Conclusión: la tabla en español es la lectura autorizada;
 el bloque chino es una traza cruda y ligeramente lossy.**
 
+## Los anexos: mezcla de idiomas y de procedencia (investigado 4-sep-2026)
+
+### Por qué hay español dentro de los bloques chinos
+
+La herramienta **interpola en plantillas chinas los textos que le pasa quien la llama**.
+Reproducido carácter a carácter con el A.2 de Iberdrola:
+
+```bash
+python3 tools/financial_rigor.py cross-validate \
+    --field "Ingresos FY2025" \
+    --values '{"Iberdrola_slides": 45017, "stockanalysis": 46612}' --unit "M EUR"
+```
+
+| Parte | Idioma | Origen |
+|---|---|---|
+| `交叉验证`, `偏差`, `所有来源偏差`, `共识值` | chino | literales del script |
+| `Ingresos FY2025` | español | `--field` |
+| `Iberdrola_slides`, `stockanalysis` | español | claves del JSON de `--values` |
+| `M EUR`, `EUR` | — | `--unit` / `--currency` |
+
+Lo chino es del script; lo español es lo que el agente le pasó como argumento.
+
+### Los anexos no son una traza reproducible
+
+El anexo se titula «Registro de verificación cruzada de datos clave», que se lee como
+rastro de auditoría reproducible. Se desvía en **las dos direcciones**:
+
+**(a) Bloques recortados.** De 12 bloques `cross-validate` revisados, **11 omiten líneas que
+la herramienta sí imprime**: `数据来源数` (nº de fuentes), `参考中位数` (mediana de
+referencia) y `共识值` (valor de consenso). El único íntegro es el A.2 de Telefónica.
+
+**(b) Líneas añadidas a mano.** 42 líneas dentro de los bloques del anexo que **ningún
+comando produce**; 31 son métricas calculadas formateadas para parecer salida de herramienta.
+
+| Informe | Líneas ajenas | Dónde |
+|---|---|---|
+| Telefonica | 0 | — (el único limpio) |
+| Iberdrola | 5 | A.6 (EV/EBITDA ×2, P/S, CAGR ×2) |
+| Google | 6 | A.5 |
+| Amazon | 9 | A.2, A.3 |
+| Microsoft | 10 | A.2, A.3 |
+| Nvidia | 12 | A.2, A.3 |
+
+En el A.6 de Iberdrola, `verify-valuation` termina en `✅ 以上指标均使用精确十进制计算,
+无浮点误差`; todo lo posterior (EV/EBITDA, P/S, los dos CAGR) está escrito a mano dentro
+del mismo bloque.
+
+**Las 31 cuentas se recalcularon: 31/31 exactas.** No hay ninguna conclusión afectada en
+ningún informe. El problema es de **procedencia**, no de corrección: quien re-ejecute los
+comandos obtendrá más líneas en unos sitios y menos en otros.
+
+### Reglas derivadas
+
+- El caso **(a)** ya lo cubre la regla de cobertura completa (no omitir columnas ni líneas).
+- El caso **(b)** motivó una segunda regla en `CLAUDE.md`: dentro de un bloque de código de
+  salida de herramienta solo va lo que la herramienta imprime; los cálculos derivados van
+  fuera, o dentro con la etiqueta `— derivado, no salida de herramienta`.
+
+Ambas aplican solo a informes nuevos; los existentes no se modifican.
+
 ## Opción evaluada y descartada por ahora: envoltorio `--lang es`
 
 Si algún día se quiere eliminar el chino de la salida, la vía que **no toca código del
