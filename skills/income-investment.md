@@ -1,3 +1,10 @@
+---
+name: income-investment
+description: |
+  Income investing: separates durable distributions from opportunistic high yield and outright yield traps.
+  Inversión por rentas: separa las distribuciones duraderas del alto dividendo oportunista y de las trampas de rentabilidad.
+---
+
 # Income Investment: Durable and Opportunistic Distribution Analysis
 
 Analyze `$ARGUMENTS` to answer:

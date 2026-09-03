@@ -1,6 +1,8 @@
 ---
 name: income-investment
-description: "AI Berkshire skill: Income Investment: Durable and Opportunistic Distribution Analysis. Source: skills/income-investment.md."
+description: |
+  Income investing: separates durable distributions from opportunistic high yield and outright yield traps.
+  Inversión por rentas: separa las distribuciones duraderas del alto dividendo oportunista y de las trampas de rentabilidad.
 ---
 
 ## Codex adapter note
